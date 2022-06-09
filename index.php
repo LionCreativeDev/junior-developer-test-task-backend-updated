@@ -40,6 +40,21 @@ function validateQueryStrings($value){
 $uri = getUriParts();
 $query = getQueryStringParams();
 
+function addBook($query){
+	$book = new items\Book();
+	$book->addBook($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
+}
+
+function addDVD($query){
+	$disk = new items\Disk();
+	$disk->addDisk($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
+}
+
+function addFurniture($query){
+	$furniture = new items\Furniture();
+	$furniture->addFurniture($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
+}
+
 if($uri[4] === "list"){
 	//echo "list called";
 	$book = new items\Book();
@@ -55,18 +70,21 @@ else if($uri[4] === "delete"){
 }
 else if($uri[4] === "add"){
 	if(validateQueryStrings($query["sku"]) && validateQueryStrings($query["name"]) && validateQueryStrings($query["price"]) && validateQueryStrings($query["productType"]) && validateQueryStrings($query["productTypeValue"])){
-		if($query["productType"] === "Book"){
-			$book = new items\Book();
-			$book->addBook($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
-		}
-		else if($query["productType"] === "DVD"){
-			$disk = new items\Disk();
-			$disk->addDisk($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
-		}
-		else if($query["productType"] === "Furniture"){
-			$furniture = new items\Furniture();
-			$furniture->addFurniture($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
-		}
+		// if($query["productType"] === "Book"){
+			// $book = new items\Book();
+			// $book->addBook($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
+		// }
+		// else if($query["productType"] === "DVD"){
+			// $disk = new items\Disk();
+			// $disk->addDisk($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
+		// }
+		// else if($query["productType"] === "Furniture"){
+			// $furniture = new items\Furniture();
+			// $furniture->addFurniture($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
+		// }
+		
+		$function_holder = 'add'.$query["productType"];
+        $function_holder($query);
 	}
 	else{
 		if(!validateQueryStrings($query["sku"]) && !validateQueryStrings($query["name"]) && !validateQueryStrings($query["price"]) && !validateQueryStrings($query["productType"]) && !validateQueryStrings($query["productTypeValue"])){
