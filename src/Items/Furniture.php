@@ -7,33 +7,6 @@ class Furniture extends Product
 {
 	private $message;
 	
-	/**
-    function __construct($sku, $name, $price, $productType, $productTypeValue)
-    {		
-		if($this->validateSKU($sku))
-			$this->setSku($sku);
-		else
-			$this->setMessage("Please provide sku");
-		
-		if($this->validateName($name))
-			$this->setName($name);
-		else
-			$this->setMessage("Please provide name");
-        
-		if($this->validatePrice($price))
-			$this->setPrice($price);
-		else
-			$this->setMessage("Please provide price");
-        
-		if($this->validateProductType($productType))
-			$this->setProductType($productType);
-		else
-			$this->setMessage("Please select product type");
-		
-		if($this->validateProductTypeValue($productTypeValue))
-			$this->setProductTypeValue($productTypeValue);
-    }**/
-	
 	public function getMessage()
 	{
         return $this->message;
@@ -48,36 +21,6 @@ class Furniture extends Product
 			$this->message = $message;
 		}
     }
-
-    // public function validateProductTypeValue($productTypeValue)
-    // {
-		// $parts = explode("x",$productTypeValue);
-		// $height = isset($parts[0]) ? $parts[0] : 0;
-		// $width = isset($parts[1]) ? $parts[1] : 0;
-		// $length = isset($parts[2]) ? $parts[2] : 0;
-		
-        // if(is_numeric($height) && is_numeric($width) && is_numeric($length) && floatval($height > 0) && floatval($width > 0) && floatval($length > 0))
-        // {
-			// //$this->setProductTypeValue($height.'x'.$width.'x'.$length);
-            // return true;
-        // }
-		// else{
-			// if((!is_numeric($height) && !is_numeric($width) && !is_numeric($length)) || (floatval($height <= 0) && floatval($width <= 0) && floatval($length <= 0)))
-				// $this->setMessage("Please, provide dimensions");
-			// else{ 
-				// if(!is_numeric($height) || floatval($height <= 0))
-					// $this->setMessage("Please provide height");
-				
-				// if(!is_numeric($width) || floatval($width <= 0))
-					// $this->setMessage("Please provide width");
-				
-				// if(!is_numeric($length) || floatval($length <= 0))
-					// $this->setMessage("Please provide lenght");
-			// }
-		// }
-
-        // return false;
-    // }
 	
 	public function addProduct($sku, $name, $price, $productType, $productTypeValue)
 	{
