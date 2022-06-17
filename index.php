@@ -42,29 +42,17 @@ $query = getQueryStringParams();
 
 function addBook($query){
 	$book = new items\Book();
-<<<<<<< HEAD
 	$book->addProduct($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
-=======
-	$book->addBook($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
->>>>>>> f62c8b9409d755fa241c336f109981cd5e3d752a
 }
 
 function addDVD($query){
 	$disk = new items\Disk();
-<<<<<<< HEAD
 	$disk->addProduct($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
-=======
-	$disk->addDisk($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
->>>>>>> f62c8b9409d755fa241c336f109981cd5e3d752a
 }
 
 function addFurniture($query){
 	$furniture = new items\Furniture();
-<<<<<<< HEAD
 	$furniture->addProduct($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
-=======
-	$furniture->addFurniture($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
->>>>>>> f62c8b9409d755fa241c336f109981cd5e3d752a
 }
 
 if($uri[4] === "list"){
@@ -79,22 +67,6 @@ else if($uri[4] === "delete"){
 }
 else if($uri[4] === "add"){
 	if(validateQueryStrings($query["sku"]) && validateQueryStrings($query["name"]) && validateQueryStrings($query["price"]) && validateQueryStrings($query["productType"]) && validateQueryStrings($query["productTypeValue"])){
-<<<<<<< HEAD
-=======
-		// if($query["productType"] === "Book"){
-			// $book = new items\Book();
-			// $book->addBook($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
-		// }
-		// else if($query["productType"] === "DVD"){
-			// $disk = new items\Disk();
-			// $disk->addDisk($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
-		// }
-		// else if($query["productType"] === "Furniture"){
-			// $furniture = new items\Furniture();
-			// $furniture->addFurniture($query["sku"], $query["name"], $query["price"], $query["productType"], $query["productTypeValue"]);
-		// }
-		
->>>>>>> f62c8b9409d755fa241c336f109981cd5e3d752a
 		$function_holder = 'add'.$query["productType"];
         $function_holder($query);
 	}
