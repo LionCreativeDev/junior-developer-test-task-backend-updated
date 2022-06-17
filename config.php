@@ -7,7 +7,6 @@
     define('DBNAME', 'scandiweb');
 	
 	require_once("./src/core/Product.php");
-	//require_once("./src/inc/Database.php");
 	require_once("./src/Items/Book.php");
 	require_once("./src/Items/Disk.php");
 	require_once("./src/Items/Furniture.php");

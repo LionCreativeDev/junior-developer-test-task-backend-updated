@@ -7,35 +7,6 @@ class Book extends Product
 {
 	private $message;
 	
-	/**
-    function __construct($sku, $name, $price, $productType, $productTypeValue)
-    {
-		if($this->validateSKU($sku))
-			$this->setSku($sku);
-		else
-			$this->setMessage("Please provide sku");
-		
-		if($this->validateName($name))
-			$this->setName($name);
-		else
-			$this->setMessage("Please provide name");
-        
-		if($this->validatePrice($price))
-			$this->setPrice($price);
-		else
-			$this->setMessage("Please provide price");
-        
-		if($this->validateProductType($productType))
-			$this->setProductType($productType);
-		else
-			$this->setMessage("Please select product type");
-		
-		if($this->validateProductTypeValue($productTypeValue))
-			$this->setProductTypeValue($productTypeValue);
-		else
-			$this->setMessage("Please provide weight");
-    }**/
-	
 	public function getMessage()
 	{
         return $this->message;
@@ -50,19 +21,8 @@ class Book extends Product
 			$this->message = $message;
 		}
     }
-
-    public function validateProductTypeValue($productTypeValue)
-    {
-        if(is_numeric($productTypeValue) && floatval($productTypeValue >= 0))
-        {
-            //$this->setProductTypeValue($this->getProductTypeValue().' KG');
-            return true;
-        }
-
-        return false;
-    }
 	
-	public function addBook($sku, $name, $price, $productType, $productTypeValue)
+	public function addProduct($sku, $name, $price, $productType, $productTypeValue)
 	{
 		if($this->validateSKU($sku))
 			$this->setSku($sku);
@@ -101,11 +61,8 @@ class Book extends Product
 			
 			$response = $this->insertProduct($params);
 			echo json_encode($response);
-			
-			//echo "book added successfully!<br/>";
 		}
 		else{
-			//echo "you have error adding book<br/>";
 			echo json_encode(array("success"=>"false","message"=>"$error"));
 		}
 	}

@@ -14,11 +14,6 @@ abstract class Product
     private $productType;
     private $productTypeValue;
 	
-	// function __construct() {
-		// echo 'constructor called';
-		// $database = new Database;
-	// }
-	
 	public function setSku($sku)
     {
         $this->sku = $sku;
@@ -91,8 +86,6 @@ abstract class Product
     public function validateProductType($productType)
     {
 		$result = false;
-		// if(preg_match('/[0-2]/', $productType) && (strlen($productType) > 0))
-			// $result = true;
 		
 		if((strlen($productType) > 0) && in_array($productType, ["Book", "DVD", "Furniture"]))
 			$result = true;
@@ -100,7 +93,45 @@ abstract class Product
         return $result;
     }
 	
-	abstract protected function validateProductTypeValue($productTypeValue);
+	public function validateProductTypeValue($productTypeValue){
+		if($this->getProductType() === "Book" || $this->getProductType() === "DVD" ){
+			if(is_numeric($productTypeValue) && floatval($productTypeValue >= 0))
+			{
+				return true;
+			}
+
+			return false;
+		}
+		elseif($this->getProductType() === "Furniture"){
+			$parts = explode("x",$productTypeValue);
+			$height = isset($parts[0]) ? $parts[0] : 0;
+			$width = isset($parts[1]) ? $parts[1] : 0;
+			$length = isset($parts[2]) ? $parts[2] : 0;
+			
+			if(is_numeric($height) && is_numeric($width) && is_numeric($length) && floatval($height > 0) && floatval($width > 0) && floatval($length > 0))
+			{
+				return true;
+			}
+			else{
+				if((!is_numeric($height) && !is_numeric($width) && !is_numeric($length)) || (floatval($height <= 0) && floatval($width <= 0) && floatval($length <= 0)))
+					$this->setMessage("Please, provide dimensions");
+				else{ 
+					if(!is_numeric($height) || floatval($height <= 0))
+						$this->setMessage("Please provide height");
+					
+					if(!is_numeric($width) || floatval($width <= 0))
+						$this->setMessage("Please provide width");
+					
+					if(!is_numeric($length) || floatval($length <= 0))
+						$this->setMessage("Please provide lenght");
+				}
+			}
+
+			return false;
+		}
+	}
+	
+	abstract protected function addProduct($sku, $name, $price, $productType, $productTypeValue);
 	
 	public function checkSku($sku)
     {

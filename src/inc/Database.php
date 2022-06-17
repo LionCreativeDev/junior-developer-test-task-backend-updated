@@ -1,6 +1,5 @@
 <?php
 
-//require_once("../../config.php");
 namespace Scandiweb\src\inc;
 
 class Database
